@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,6 +13,10 @@ namespace _20201202_01
         static void Main(string[] args)
         {
             string[] input = System.IO.File.ReadAllLines(@"..\..\PuzzleInput.txt");
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
             int numOk = 0;
 
             for (int i = 0; i < input.Length; i++)
@@ -24,12 +29,14 @@ namespace _20201202_01
 
                 if (TestPassword(min, max, c, password))
                 {
-                    Console.WriteLine(String.Format("Password '{0}' is a valid password", password));
+                    //Console.WriteLine(String.Format("Password '{0}' is a valid password", password));
                     numOk++;
                 }
             }
 
+            sw.Stop();
             Console.WriteLine(String.Format("There are {0} passwords that are valid", numOk));
+            Console.WriteLine(String.Format("Elapsed time: {0} ms.", sw.ElapsedMilliseconds.ToString()));
             Console.ReadLine();
         }
 
