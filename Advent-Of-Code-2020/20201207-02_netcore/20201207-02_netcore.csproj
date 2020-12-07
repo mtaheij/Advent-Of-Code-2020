@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_20201207_02_netcore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="PuzzleInput.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="PuzzleInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
