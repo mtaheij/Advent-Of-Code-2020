@@ -7,7 +7,7 @@ public class Class1
     {
         static void Main(string[] args)
         {
-            string[] input = System.IO.File.ReadAllLines(@"..\..\PuzzleInput.txt");
+            string[] input = System.IO.File.ReadAllLines(@"PuzzleInput.txt");
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
