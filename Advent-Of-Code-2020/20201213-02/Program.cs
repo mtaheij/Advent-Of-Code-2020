@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
-namespace _20201213_01
+namespace _20201213_02
 {
     class Program
     {
@@ -18,12 +20,19 @@ namespace _20201213_01
             string[] busses = busIds.Split(",");
             double nextPossibleDeparture = 99999999;
             double busIdToTake = 0;
+            long product = 1;
+            long[] ids = new long[busses.Length];
+            long b = 0;
 
-            foreach (string bus in busses)
+            for (int i = 0; i < busses.Length; i++)
             {
+                string bus = busses[i];
                 if (!bus.Equals("x"))
                 {
-                    double busId = double.Parse(bus);
+                    long busId = long.Parse(bus);
+
+                    product *= busId;
+                    ids[i] = busId;
 
                     double departuresSinceStart = earliestTimeStamp / busId;
                     double nextDeparture = (departuresSinceStart + 1) * busId;
@@ -36,11 +45,22 @@ namespace _20201213_01
                 }
             }
 
+            long p, sm = 0;
+            for (int i = 0; i< busses.Length; i++)
+            {
+                if (ids[i] != 0)
+                {
+                    p = product / ids[i];
+                    sm += (ids[i] - i) * NumberUtils.mulInv(p, ids[i]) * p;
+                }
+
+            }
+
+            b = sm % product;
+
             sw.Stop();
 
-            Console.WriteLine(String.Format("Your earliest departure is {0}", nextPossibleDeparture.ToString()));
-            double answer = (nextPossibleDeparture - earliestTimeStamp - 1) * busIdToTake;
-            Console.WriteLine(String.Format("The bus Id is {0}, you'll have to wait {1} minutes. The answer is {2}", busIdToTake, nextPossibleDeparture - earliestTimeStamp - 1, answer));
+            Console.WriteLine(String.Format("The answer is {0}", b));
             Console.WriteLine(String.Format("Elapsed time: {0} ms.", sw.ElapsedMilliseconds.ToString()));
             Console.ReadLine();
         }
